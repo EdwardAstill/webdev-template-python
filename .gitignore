@@ -1,0 +1,27 @@
+# JavaScript / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Secrets / local settings
+.env*
+!.env.example
+
+# Build / tool output
+coverage/
+test-results/
+playwright-report/
+*.log
+.DS_Store
+.vercel/

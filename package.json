@@ -1,0 +1,24 @@
+{
+  "name": "webdev-template-python",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bun and Next.js frontend with a FastAPI and uv backend.",
+  "license": "MIT",
+  "packageManager": "bun@1.4.2",
+  "scripts": {
+    "setup": "bun install --frozen-lockfile && bun install --cwd frontend --frozen-lockfile && uv sync --directory backend --locked",
+    "dev": "bun --bun concurrently --kill-others --kill-timeout 3000 --names web,api \"bun run dev:web\" \"bun run dev:api\"",
+    "dev:web": "bun run --cwd frontend dev",
+    "dev:api": "uv run --directory backend --locked uvicorn app.main:app --reload --host 127.0.0.1 --port 8000",
+    "check": "bun run check:web && bun run check:api",
+    "check:web": "bun run --cwd frontend check",
+    "check:api": "uv run --directory backend --locked ruff check . && uv run --directory backend --locked ruff format --check . && uv run --directory backend --locked pytest",
+    "build": "bun run --cwd frontend build",
+    "test:smoke": "bun --bun concurrently --kill-others --kill-timeout 3000 --success command-smoke --names web,api,smoke \"bun run start:web\" \"bun run start:api\" \"bun scripts/smoke.mjs\"",
+    "start:web": "bun run --cwd frontend start",
+    "start:api": "uv run --directory backend --locked --no-dev uvicorn app.main:app --host 0.0.0.0 --port 8000"
+  },
+  "devDependencies": {
+    "concurrently": "10.0.6"
+  }
+}
